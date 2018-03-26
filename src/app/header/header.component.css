@@ -1,0 +1,10 @@
+
+.header {
+  height: 77px;
+  padding: 17px 0 10px 0;
+}
+
+.header-logo {
+  max-width: 190px;
+  min-width: 180px;
+}
