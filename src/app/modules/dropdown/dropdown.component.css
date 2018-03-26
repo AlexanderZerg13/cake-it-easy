@@ -1,0 +1,31 @@
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+.btn {
+  background-color: transparent;
+  outline: none;
+  box-shadow: none;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-items {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.dropdown-item:hover {
+  background-color: #d3d3d3;
+  cursor: pointer;
+}

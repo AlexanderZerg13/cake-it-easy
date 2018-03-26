@@ -11,6 +11,7 @@ import { BakeryService } from '../bakery.service';
 export class CakesOverviewComponent implements OnInit {
 
   bakeries: Bakery[];
+  bakery: Bakery;
 
   constructor(
     private bakeryService: BakeryService
@@ -23,5 +24,9 @@ export class CakesOverviewComponent implements OnInit {
   getBakery(): void {
     this.bakeryService.getBakeries()
       .subscribe(bakeries => this.bakeries = bakeries);
+  }
+
+  onItemSelected($event): void {
+    this.bakery = $event;
   }
 }

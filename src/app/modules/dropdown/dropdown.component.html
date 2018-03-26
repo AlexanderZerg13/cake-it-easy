@@ -1,0 +1,13 @@
+<div class="dropdown">
+  <button class="btn btn-default btn-bg" (click)="onToggle()">
+    {{selectedItem ? selectedItem.name : "My baccery"}}
+    <span class="fa fa-angle-down"></span>
+  </button>
+  <div class="dropdown-items" *ngIf="showDropDown">
+    <ul>
+      <li *ngFor="let item of items" class="dropdown-item" (click)="itemClick(item)">
+        {{item.name}}
+      </li>
+    </ul>
+  <div>
+</div>
