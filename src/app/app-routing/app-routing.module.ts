@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CakesOverviewComponent } from '../cakes-overview/cakes-overview.component';
@@ -7,16 +6,14 @@ import { CustomizeCakeComponent } from '../customize-cake/customize-cake.compone
 import { CartComponent } from '../cart/cart.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', redirectTo: '/overview', pathMatch: 'full' },
   { path: 'overview', component: CakesOverviewComponent },
   { path: 'customize-cake', component: CustomizeCakeComponent },
   { path: 'cart', component: CartComponent },
 ];
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: []
+  imports: [ RouterModule.forRoot(routes) ],
+  exports: [ RouterModule ]
 })
 export class AppRoutingModule { }
