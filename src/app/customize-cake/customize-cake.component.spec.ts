@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BucketComponent } from './bucket.component';
+import { CustomizeCakeComponent } from './customize-cake.component';
 
-describe('BucketComponent', () => {
-  let component: BucketComponent;
-  let fixture: ComponentFixture<BucketComponent>;
+describe('CustomizeCakeComponent', () => {
+  let component: CustomizeCakeComponent;
+  let fixture: ComponentFixture<CustomizeCakeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BucketComponent ]
+      declarations: [ CustomizeCakeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BucketComponent);
+    fixture = TestBed.createComponent(CustomizeCakeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

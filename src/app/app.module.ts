@@ -10,7 +10,8 @@ import { CakesOverviewComponent } from './cakes-overview/cakes-overview.componen
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { BakeryService } from './bakery.service';
-import { BucketComponent } from './bucket/bucket.component';
+import { CartComponent } from './cart/cart.component';
+import { CustomizeCakeComponent } from './customize-cake/customize-cake.component';
 
 
 @NgModule({
@@ -18,7 +19,9 @@ import { BucketComponent } from './bucket/bucket.component';
     AppComponent,
     HeaderComponent,
     CakesOverviewComponent,
-    BucketComponent
+    BucketComponent,
+    CartComponent,
+    CustomizeCakeComponent
   ],
   imports: [
     BrowserModule,
