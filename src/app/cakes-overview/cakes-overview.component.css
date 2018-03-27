@@ -41,6 +41,7 @@ li {
 }
 
 .search-items {
+  position: relative;
   padding: 15px;
   box-sizing: border-box;
 }
@@ -49,9 +50,37 @@ li {
 
 }
 
-.search-item {
+.search-items .search-item {
   max-width: 345px;
-  min-width: 120px;
+  min-width: 150px;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.search-item-hover {
+  position: absolute;
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.3);
+  margin: 0 15px;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.search-items .search-item:hover .search-item-hover {
+  visibility: visible;
+}
+
+.search-items .item-description {
+  height: 0;
+  padding-bottom: 100%;
+
+}
+
+.search-items .item-name {
+  margin: 8px auto;
+  color: black;
 }
 
 .item-image {
