@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Bakery } from '../model/bakery';
+import { Cake } from '../model/cake';
 import { BakeryService } from '../bakery.service';
 
 @Component({
@@ -11,7 +12,9 @@ import { BakeryService } from '../bakery.service';
 export class CakesOverviewComponent implements OnInit {
 
   bakeries: Bakery[];
-  bakery: Bakery;
+
+  selectedBakery: Bakery;
+  selectedCakes: Cake[];
 
   constructor(
     private bakeryService: BakeryService
@@ -21,12 +24,18 @@ export class CakesOverviewComponent implements OnInit {
     this.getBakery();
   }
 
+  itemClick(bakery: Bakery): void {
+    this.selectedBakery = bakery;
+    this.getCakes(bakery);
+  }
+
   getBakery(): void {
     this.bakeryService.getBakeries()
       .subscribe(bakeries => this.bakeries = bakeries);
   }
 
-  onItemSelected($event): void {
-    this.bakery = $event;
+  getCakes(bakery: Bakery): void {
+    this.bakeryService.getCakes(bakery)
+      .subscribe(cakes => {this.selectedCakes = cakes});
   }
 }

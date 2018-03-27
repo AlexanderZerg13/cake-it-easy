@@ -1,4 +1,30 @@
-<div>
-  <app-dropdown [items]="bakeries" (selectedItemEvent)="onItemSelected($event)"></app-dropdown>
-  <div *ngIf="bakery">{{bakery.name}}</div>
+<div class="row justify-content-md-center dropdown-wrapper">
+  <div class="dropdown-title">Bakery:</div> 
+  <div class="dropdown" ngbDropdown>
+    <button class=" dropdown-btn" ngbDropdownToggle>
+      {{selectedBakery ? selectedBakery.name : "Choose bakery"}}
+    </button>
+    <div class="dropdown-items" ngbDropdownMenu >
+      <ul>
+        <li *ngFor="let bakery of bakeries" class="dropdown-item" (click)="itemClick(bakery)">
+          {{bakery.name}}
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
+<div class="row">
+  <div class="col" *ngIf="selectedBakery">CAKES IN {{selectedBakery.name | uppercase}}:</div>
+</div>
+
+<div class="row search-items">
+  <div *ngFor="let cake of selectedCakes" class="col-sm-4 search-item" >
+    <div class="card">
+      <div class="card-body">
+         <h4 class="card-title">{{cake.name}}</h4>
+         <img class="item-image" src={{cake.pictureUrl}}/>
+      </div>
+    </div>
+  </div>
+</div>
+
