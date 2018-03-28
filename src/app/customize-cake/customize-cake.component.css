@@ -1,0 +1,52 @@
+.cake-builder {
+  width: 80%;
+  margin: 15px auto 0;
+  box-shadow: 0 0 6px 0 #dedede;
+  background-color: white;
+}
+
+.cake-info {
+  border-bottom: 1px solid #dedede;
+}
+
+.cake-info-conteiner {
+  height: 295px;
+  display: table;
+}
+
+.cake-name {
+  padding: 0;
+}
+
+.cake-builder-sections {
+
+}
+
+.cake-image-container {
+  margin-left: -15px;
+}
+
+.vendor-name {
+  color: #5faea7;
+  margin-top: -7px;
+}
+
+.btn-link {
+  padding-left: 0;
+}
+
+.build-section {
+  border-bottom: 1px solid #dedede;
+  font-size: 18px;
+  padding: 30px 25px;
+}
+
+.cake-info .cake-details {
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.cake-info .cake-details .description {
+  margin-bottom: 25px;
+}

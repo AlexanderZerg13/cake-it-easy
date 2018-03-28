@@ -8,7 +8,7 @@ import { CartComponent } from '../cart/cart.component';
 const routes: Routes = [
   { path: '', redirectTo: '/overview', pathMatch: 'full' },
   { path: 'overview', component: CakesOverviewComponent },
-  { path: 'customize-cake', component: CustomizeCakeComponent },
+  { path: 'customize-cake/:id', component: CustomizeCakeComponent },
   { path: 'cart', component: CartComponent },
 ];
 

@@ -17,6 +17,7 @@ export class BakeryService {
   private bakeryEndpoint = 'http://dev.cakeiteasy.no/';
   private bakeryUrl = `${this.bakeryEndpoint}api/bakery/all-bakeries?includeCity=false`;
   private cakesUrl = `${this.bakeryEndpoint}api/search`;
+  private cakeUrl = `${this.bakeryEndpoint}api/search/get-cake`;
 
   getBakeries(): Observable<Bakery[]> {
     return this.http.get<Bakery[]>(this.bakeryUrl).pipe(
@@ -30,11 +31,16 @@ export class BakeryService {
     );
   }
 
+  getCake(id: number): Observable<Cake> {
+    return this.http.get<Cake>(`${this.cakeUrl}?id=${id}`).pipe(
+      catchError(this.handleError('getCake', undefined))
+    );
+  }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       return of(result as T);
-    }
+    };
   }
 }

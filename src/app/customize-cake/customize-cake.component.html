@@ -1,3 +1,42 @@
-<p>
-  customize-cake works!
-</p>
+<div class="cake-builder">
+  <div class="cake-builder-content" *ngIf="cake">
+    <div class="cake-info">
+      <div class="row">
+        <div class="col-sm-5">
+          <div class="cake-image-conteiner">
+            <img class="img-responsive" src={{cake.imageUrl}}>
+          </div>
+        </div>
+        <div class="col-sm-7">
+          <div class="cake-info-conteiner">
+            <div class="cake-details">
+              <h2 class="cake-name">{{cake.name}}</h2>
+              <h4 class="vendor-name"><a class="btn btn-link" >{{cake.bakery.name}}</a></h4>
+              <div class="description">{{cake.description}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cake-builder-sections">
+      <section class="cake-sizes build-section">
+        <div class="col-sm5">
+          <div class="build-section-header">Choose size</div>
+        </div>
+        <div class="col-sm-7">
+          <div class="build-section-content">
+            
+          </div>
+        </div>
+      </section>
+      <section class="cake-fillings build-section">
+        <div class="col-sm5">
+          <div class="build-section-header">Choose flavour / filling</div>
+        </div>
+        <div class="col-sm-7">
+          
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

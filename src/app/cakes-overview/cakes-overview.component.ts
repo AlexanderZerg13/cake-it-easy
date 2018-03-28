@@ -36,6 +36,6 @@ export class CakesOverviewComponent implements OnInit {
 
   getCakes(bakery: Bakery): void {
     this.bakeryService.getCakes(bakery)
-      .subscribe(cakes => {this.selectedCakes = cakes});
+      .subscribe(cakes => { this.selectedCakes = cakes; });
   }
 }

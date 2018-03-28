@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
+import { BakeryService } from '../bakery.service';
+
+import { Cake } from '../model/cake';
 
 @Component({
   selector: 'app-customize-cake',
@@ -7,9 +13,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomizeCakeComponent implements OnInit {
 
-  constructor() { }
+  cake: Cake;
 
-  ngOnInit() {
+  constructor(
+    private route: ActivatedRoute,
+    private bakeryService: BakeryService,
+  ) { }
+
+  ngOnInit():void {
+    this.getCake();
+  }
+
+  getCake(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.bakeryService.getCake(id)
+      .subscribe(cake => this.cake = cake);
   }
 
 }

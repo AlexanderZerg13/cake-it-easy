@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { CakesOverviewComponent } from './cakes-overview/cakes-overview.component'; 
+import { CakesOverviewComponent } from './cakes-overview/cakes-overview.component';
 import { CartComponent } from './cart/cart.component';
 import { CustomizeCakeComponent } from './customize-cake/customize-cake.component';
 
