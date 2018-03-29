@@ -2,18 +2,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { NgReduxModule } from '@angular-redux/store';
+import { NgReduxRouterModule } from '@angular-redux/router';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-import { AppRoutingModule } from './app-routing/app-routing.module';
-
+// This app's Components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { CakesOverviewComponent } from './cakes-overview/cakes-overview.component';
 import { CartComponent } from './cart/cart.component';
 import { CustomizeCakeComponent } from './customize-cake/customize-cake.component';
 
-import { BakeryService } from './bakery.service';
+// This app's mgModules
+import { StoreModule } from './store/module';
+import { BakeryModule } from './bakeries/module';
+
+// This app's routes
+import { appRoutes } from './routes';
 
 
 @NgModule({
@@ -25,13 +32,16 @@ import { BakeryService } from './bakery.service';
     CustomizeCakeComponent
   ],
   imports: [
+    RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    NgReduxModule,
+    NgReduxRouterModule.forRoot(),
     NgbModule.forRoot(),
-    AppRoutingModule
+    BakeryModule,
+    StoreModule,
   ],
-  providers: [BakeryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

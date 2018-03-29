@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { select, select$ } from '@angular-redux/store';
+import { Observable } from 'rxjs/Observable';
 
-import { Bakery } from '../model/bakery';
-import { Cake } from '../model/cake';
-import { BakeryService } from '../bakery.service';
+import { BakeryAPIActions } from '../bakeries/api/actions';
+import { Bakery, Cake } from '../bakeries/model';
+
+export const sortBakeries = (bakeryDictionary$: Observable<{}>) =>
+  bakeryDictionary$
 
 @Component({
   selector: 'app-cakes-overview',
@@ -11,31 +15,25 @@ import { BakeryService } from '../bakery.service';
 })
 export class CakesOverviewComponent implements OnInit {
 
-  bakeries: Bakery[];
+  @select$(['bakeries', 'items'], sortBakeries)
+  readonly bakeries$: Observable<Bakery[]>;
+
+  @select(['bakeries', 'loading'])
+  readonly loading$: Observable<boolean>;
+
+  @select(['bakeries', 'error'])
+  readonly error: Observable<any>;
 
   selectedBakery: Bakery;
   selectedCakes: Cake[];
 
-  constructor(
-    private bakeryService: BakeryService
-  ) { }
+  constructor(private actions: BakeryAPIActions) {}
 
   ngOnInit() {
-    this.getBakery();
+    this.actions.loadBakeres();
   }
 
   itemClick(bakery: Bakery): void {
     this.selectedBakery = bakery;
-    this.getCakes(bakery);
-  }
-
-  getBakery(): void {
-    this.bakeryService.getBakeries()
-      .subscribe(bakeries => this.bakeries = bakeries);
-  }
-
-  getCakes(bakery: Bakery): void {
-    this.bakeryService.getCakes(bakery)
-      .subscribe(cakes => { this.selectedCakes = cakes; });
   }
 }

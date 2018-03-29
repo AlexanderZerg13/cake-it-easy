@@ -6,7 +6,7 @@
     </button>
     <div class="dropdown-items" ngbDropdownMenu >
       <ul>
-        <li *ngFor="let bakery of bakeries" class="dropdown-item" (click)="itemClick(bakery)">
+        <li *ngFor="let bakery of bakeries$ | async" class="dropdown-item" (click)="itemClick(bakery)">
           {{bakery.name}}
         </li>
       </ul>

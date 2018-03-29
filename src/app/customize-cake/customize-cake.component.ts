@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { BakeryService } from '../bakery.service';
+import { BakeryAPIActions } from '../bakeries/api/actions';
 
-import { Cake } from '../model/cake';
+import { Cake } from '../bakeries/model';
 
 @Component({
   selector: 'app-customize-cake',
@@ -17,7 +17,7 @@ export class CustomizeCakeComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private bakeryService: BakeryService,
+    private actions: BakeryAPIActions,
   ) { }
 
   ngOnInit():void {
@@ -26,8 +26,8 @@ export class CustomizeCakeComponent implements OnInit {
 
   getCake(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.bakeryService.getCake(id)
-      .subscribe(cake => this.cake = cake);
+    /*this.bakeryService.getCake(id)
+      .subscribe(cake => this.cake = cake);*/
   }
 
 }
