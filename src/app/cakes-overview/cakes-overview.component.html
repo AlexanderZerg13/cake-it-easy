@@ -2,7 +2,7 @@
   <div class="dropdown-title">Bakery:</div> 
   <div class="dropdown" ngbDropdown>
     <button class=" dropdown-btn" ngbDropdownToggle>
-      {{selectedBakery ? selectedBakery.name : "Choose bakery"}}
+      {{(selectedBakery$ | async) ? (selectedBakery$ | async).name : "Choose bakery"}}
     </button>
     <div class="dropdown-items" ngbDropdownMenu >
       <ul>
@@ -14,7 +14,7 @@
   </div>
 </div>
 <div class="row justify-content-center">
-  <div *ngIf="selectedBakery">CAKES IN {{selectedBakery.name | uppercase}}:</div>
+  <div *ngIf="selectedBakery$ | async">CAKES IN {{(selectedBakery$ | async).name | uppercase}}:</div>
 </div>
 
 <div class="row search-items">

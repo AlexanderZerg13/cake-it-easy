@@ -1,9 +1,9 @@
 import { BakeryAPIAction, BakeryAPIActions } from './actions';
-import { IDataList } from '../model';
+import { IDataList, Bakery } from '../model';
 import { Action } from 'redux';
 
 const INITIAL_STATE: IDataList = {
-  items: {},
+  items: [],
   loading: false,
   error: null,
 }
@@ -17,7 +17,7 @@ export function createBakeriesAPIReducer() {
       case BakeryAPIActions.LOAD_STARTED:
         return {
           ...state,
-          items: {},
+          items: [],
           loading: true,
           error: null,
         };
@@ -35,6 +35,18 @@ export function createBakeriesAPIReducer() {
           loading: false,
           error: action.error,
         };
+    }
+
+    return state;
+  }
+}
+
+export function createSelectedBakeryReducer() {
+  return function selecteBakeryReducer(state: Bakery = null, a: Action): Bakery {
+    const action = a as BakeryAPIAction;
+
+    if (action.type === BakeryAPIActions.SELECT_BAKERY) {
+      return action.payload;
     }
 
     return state;

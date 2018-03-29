@@ -15,7 +15,7 @@ export const sortBakeries = (bakeryDictionary$: Observable<{}>) =>
 })
 export class CakesOverviewComponent implements OnInit {
 
-  @select$(['bakeries', 'items'], sortBakeries)
+  @select(['bakeries', 'items'])
   readonly bakeries$: Observable<Bakery[]>;
 
   @select(['bakeries', 'loading'])
@@ -24,7 +24,9 @@ export class CakesOverviewComponent implements OnInit {
   @select(['bakeries', 'error'])
   readonly error: Observable<any>;
 
-  selectedBakery: Bakery;
+  @select(['selectedBakery'])
+  readonly selectedBakery$: Observable<Bakery>;
+
   selectedCakes: Cake[];
 
   constructor(private actions: BakeryAPIActions) {}
@@ -34,6 +36,10 @@ export class CakesOverviewComponent implements OnInit {
   }
 
   itemClick(bakery: Bakery): void {
-    this.selectedBakery = bakery;
+    this.actions.selectBakery(bakery);
+  }
+
+  getKey(_, bakery: Bakery) {
+    return bakery.id;
   }
 }

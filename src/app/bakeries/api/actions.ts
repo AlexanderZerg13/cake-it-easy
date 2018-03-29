@@ -4,16 +4,19 @@ import { FluxStandardAction } from 'flux-standard-action';
 
 import { Bakery } from '../model';
 
-type Payload = Bakery[]
-export type BakeryAPIAction = FluxStandardAction<Payload>;
+export type BakeryAPIAction = FluxStandardAction<any>;
 
 
 @Injectable()
 export class BakeryAPIActions {
+
   static readonly LOAD_BAKERIES = 'LOAD_BAKERIES';
+
   static readonly LOAD_STARTED = 'LOAD_STARTED';
   static readonly LOAD_SUCCEEDED = 'LOAD_SUCCEEDED';
   static readonly LOAD_FAILED = 'LOAD_FAILED';
+
+  static readonly SELECT_BAKERY = 'SELECT_BAKERY';
 
   @dispatch()
   loadBakeres = (): BakeryAPIAction => ({
@@ -28,7 +31,7 @@ export class BakeryAPIActions {
     payload: null,
   })
 
-  loadSucceeded = (payload: Payload): BakeryAPIAction => ({
+  loadSucceeded = (payload: Bakery[]): BakeryAPIAction => ({
     type: BakeryAPIActions.LOAD_SUCCEEDED,
     meta: null,
     payload,
@@ -39,5 +42,12 @@ export class BakeryAPIActions {
     meta: null,
     payload: null,
     error,
+  })
+
+  @dispatch()
+  selectBakery = (payload: Bakery): BakeryAPIAction => ({
+    type: BakeryAPIActions.SELECT_BAKERY,
+    meta: null,
+    payload,
   })
 }
