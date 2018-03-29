@@ -6,11 +6,18 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/filter';
 
 import { IAppState } from '../../store/model';
 import { BakeryAPIService } from './service';
 import { BakeryAPIAction, BakeryAPIActions } from './actions';
 import { ACTIONS_TYPE } from '../model';
+
+const bakeriesNotAlreadyFetched = (
+  state: IAppState): boolean => !(
+    state.bakeries &&
+    state.bakeries.items &&
+    Object.keys(state.bakeries.items).length);
 
 @Injectable()
 export class BakeryAPIEpics {
@@ -30,6 +37,7 @@ export class BakeryAPIEpics {
   private createLoadBakeryEpic(): Epic<BakeryAPIAction, IAppState> {
     return (action$, store) => action$
       .ofType(BakeryAPIActions.LOAD_BAKERIES)
+      .filter(() => bakeriesNotAlreadyFetched(store.getState()))
       .switchMap(() => this.service.getBakeries()
         .map(data => this.actions.loadSucceeded(data, ACTIONS_TYPE.BAKERIES))
         .catch(response => of(this.actions.loadFailed({
