@@ -1,18 +1,18 @@
 <div class="cake-builder">
-  <div class="cake-builder-content" *ngIf="cake">
+  <div class="cake-builder-content" *ngIf="cake$ | async">
     <div class="cake-info">
       <div class="row">
         <div class="col-sm-5">
           <div class="cake-image-conteiner">
-            <img class="img-responsive" src={{cake.imageUrl}}>
+            <img class="img-responsive" src="{{(cake$ | async)?.imageUrl}}">
           </div>
         </div>
         <div class="col-sm-7">
           <div class="cake-info-conteiner">
             <div class="cake-details">
-              <h2 class="cake-name">{{cake.name}}</h2>
-              <h4 class="vendor-name"><a class="btn btn-link" >{{cake.bakery.name}}</a></h4>
-              <div class="description">{{cake.description}}</div>
+              <h2 class="cake-name">{{(cake$ | async)?.name}}</h2>
+              <h4 class="vendor-name"><a class="btn btn-link" >{{(cake$ | async)?.bakery.name}}</a></h4>
+              <div class="description">{{(cake$ | async).description}}</div>
             </div>
           </div>
         </div>

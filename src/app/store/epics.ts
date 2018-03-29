@@ -10,6 +10,7 @@ export class RootEpics {
     return [
       this.bakeryEpics.createEpicBakeries(),
       this.bakeryEpics.createEpicSelectedBakeryCakes(),
+      this.bakeryEpics.createEpicSelectedCake(),
     ];
   }
 }

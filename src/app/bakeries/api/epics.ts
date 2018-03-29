@@ -34,6 +34,10 @@ export class BakeryAPIEpics {
     return createEpicMiddleware(this.createLoadSelectedBakeryEpic());
   }
 
+  public createEpicSelectedCake() {
+    return createEpicMiddleware(this.createLoadCakeEpic());
+  }
+
   private createLoadBakeryEpic(): Epic<BakeryAPIAction, IAppState> {
     return (action$, store) => action$
       .ofType(BakeryAPIActions.LOAD_BAKERIES)
@@ -43,7 +47,7 @@ export class BakeryAPIEpics {
         .catch(response => of(this.actions.loadFailed({
           status: '' + response.status, 
         }, ACTIONS_TYPE.BAKERIES)))
-        .startWith(this.actions.loadStarted(ACTIONS_TYPE.BAKERIES)))
+        .startWith(this.actions.loadStarted(ACTIONS_TYPE.BAKERIES)));
   }
 
   private createLoadSelectedBakeryEpic(): Epic<BakeryAPIAction, IAppState> {
@@ -54,6 +58,17 @@ export class BakeryAPIEpics {
         .catch(response => of(this.actions.loadFailed({
           status: '' + response.status,
         }, ACTIONS_TYPE.CAKES)))
-        .startWith(this.actions.loadStarted(ACTIONS_TYPE.CAKES)))
+        .startWith(this.actions.loadStarted(ACTIONS_TYPE.CAKES)));
+  }
+
+  private createLoadCakeEpic(): Epic<BakeryAPIAction, IAppState> {
+    return (action$, store) => action$
+      .ofType(BakeryAPIActions.LOAD_CAKE)
+      .switchMap((action) => this.service.getCake(action.payload)
+        .map(data => this.actions.loadSucceeded(data, ACTIONS_TYPE.CAKE))
+        .catch(response => of(this.actions.loadFailed({
+          status: '' + response.status,
+        }, ACTIONS_TYPE.CAKE)))
+        .startWith(this.actions.loadStarted(ACTIONS_TYPE.CAKE)));
   }
 }

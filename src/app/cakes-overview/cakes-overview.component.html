@@ -2,7 +2,7 @@
   <div class="dropdown-title">Bakery:</div> 
   <div class="dropdown" ngbDropdown>
     <button class=" dropdown-btn" ngbDropdownToggle>
-      {{(selectedBakery$ | async) ? (selectedBakery$ | async).name : "Choose bakery"}}
+      {{(selectedBakery$ | async)?.name || "Choose bakery"}}
     </button>
     <div class="dropdown-items" ngbDropdownMenu >
       <ul>

@@ -1,9 +1,17 @@
 export enum ACTIONS_TYPE {
-  BAKERIES, CAKES
+  BAKERIES, CAKES, CAKE
 }
 
-export interface IDataList {
-  items: {};
+export interface IDataList extends IData{
+  items: Array<any>;
+}
+
+export interface IDataObject extends IData {
+  items: object;
+}
+
+export interface IData {
+  items: any;
   loading: boolean;
   error: any;
 }

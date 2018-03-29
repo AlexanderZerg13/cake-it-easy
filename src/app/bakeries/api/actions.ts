@@ -12,12 +12,13 @@ export class BakeryAPIActions {
 
   static readonly LOAD_BAKERIES = 'LOAD_BAKERIES';
   static readonly LOAD_SELECTED_BAKERY_CAKES = 'LOAD_SELECTED_BAKERY_CAKES';
+  static readonly LOAD_CAKE = 'LOAD_CAKE';
+
+  static readonly SELECT_BAKERY = 'SELECT_BAKERY';
 
   static readonly LOAD_STARTED = 'LOAD_STARTED';
   static readonly LOAD_SUCCEEDED = 'LOAD_SUCCEEDED';
   static readonly LOAD_FAILED = 'LOAD_FAILED';
-
-  static readonly SELECT_BAKERY = 'SELECT_BAKERY';
 
   @dispatch()
   loadBakeres = (): BakeryAPIAction => ({
@@ -33,12 +34,21 @@ export class BakeryAPIActions {
     payload,
   })
 
+  // Unuse
   @dispatch()
   loadSelectedBakeryCakes = (): BakeryAPIAction => ({
     type: BakeryAPIActions.LOAD_SELECTED_BAKERY_CAKES,
     meta: ACTIONS_TYPE.CAKES,
     payload: null,
   })
+
+  @dispatch()
+  loadSelectedCake = (payload: number): BakeryAPIAction => ({
+    type: BakeryAPIActions.LOAD_CAKE,
+    meta: ACTIONS_TYPE.CAKE,
+    payload,
+  });
+
 
   loadStarted = (meta: ACTIONS_TYPE): BakeryAPIAction => ({
     type: BakeryAPIActions.LOAD_STARTED,

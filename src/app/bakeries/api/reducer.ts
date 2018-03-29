@@ -1,20 +1,29 @@
 import { Action } from 'redux';
 
 import { BakeryAPIAction, BakeryAPIActions } from './actions';
-import { IDataList, Bakery, ACTIONS_TYPE } from '../model';
+import { IData, IDataList, IDataObject, Bakery, Cake, ACTIONS_TYPE } from '../model';
 
-const INITIAL_STATE: IDataList = {
-  items: [],
+const STATUS_STATE = {
   loading: false,
   error: null,
 }
 
-function APIReducer(state: IDataList = INITIAL_STATE, action: BakeryAPIAction) {
+const INITIAL_STATE_LIST: IDataList = {
+  items: [],
+  ...STATUS_STATE,
+}
+
+const INITIAL_STATE_OBJECT: IData = {
+  items: null,
+  ...STATUS_STATE,
+}
+
+function APIReducer(state: IData, initialState: IData, action: BakeryAPIAction) {
   switch (action.type) {
     case BakeryAPIActions.LOAD_STARTED:
       return {
         ...state,
-        items: [],
+        items: initialState.items,
         loading: true,
         error: null,
       };
@@ -28,7 +37,7 @@ function APIReducer(state: IDataList = INITIAL_STATE, action: BakeryAPIAction) {
     case BakeryAPIActions.LOAD_FAILED:
       return {
         ...state,
-        items: {},
+        items: initialState.items,
         loading: false,
         error: action.error,
       };
@@ -38,12 +47,12 @@ function APIReducer(state: IDataList = INITIAL_STATE, action: BakeryAPIAction) {
 }
 
 export function createBakeriesAPIReducer() {
-  return function bakeriesReducer(state: IDataList = INITIAL_STATE,
+  return function bakeriesReducer(state: IDataList = INITIAL_STATE_LIST,
     a: Action): IDataList {
     const action = a as BakeryAPIAction;
 
     if (action.meta === ACTIONS_TYPE.BAKERIES) {
-      return APIReducer(state, action);
+      return APIReducer(state, INITIAL_STATE_LIST, action);
     }
     
     return state;
@@ -51,12 +60,12 @@ export function createBakeriesAPIReducer() {
 }
 
 export function createSelectedBakeryCakesAPIReducer() {
-  return function selectBakeryCakesReducer(state: IDataList = INITIAL_STATE,
+  return function selectBakeryCakesReducer(state: IDataList = INITIAL_STATE_LIST,
     a: Action): IDataList {
     const action = a as BakeryAPIAction;
 
     if (action.meta === ACTIONS_TYPE.CAKES) {
-      return APIReducer(state, action);
+      return APIReducer(state, INITIAL_STATE_LIST, action);
     }
 
     return state;
@@ -75,4 +84,15 @@ export function createSelectedBakeryReducer() {
   }
 }
 
+export function createSelectedCakeAPIReducer() {
+  return function selectCakeReducer(state: IDataObject = INITIAL_STATE_OBJECT,
+    a: Action): IDataObject {
+    const action = a as BakeryAPIAction;
 
+    if (action.meta === ACTIONS_TYPE.CAKE) {
+      return APIReducer(state, INITIAL_STATE_OBJECT, action);
+    }
+
+    return state;
+  }
+}

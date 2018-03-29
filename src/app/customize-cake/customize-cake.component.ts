@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { select, select$ } from '@angular-redux/store';
+import { Observable } from 'rxjs/Observable';
+
 
 import { BakeryAPIActions } from '../bakeries/api/actions';
 
@@ -13,21 +16,16 @@ import { Cake } from '../bakeries/model';
 })
 export class CustomizeCakeComponent implements OnInit {
 
-  cake: Cake;
+  @select(['selectedCake', 'items'])
+  readonly cake$: Observable<Cake>;
 
   constructor(
     private route: ActivatedRoute,
     private actions: BakeryAPIActions,
-  ) { }
+  ) {}
 
   ngOnInit():void {
-    this.getCake();
-  }
-
-  getCake(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    /*this.bakeryService.getCake(id)
-      .subscribe(cake => this.cake = cake);*/
+    this.actions.loadSelectedCake(id);
   }
-
 }
