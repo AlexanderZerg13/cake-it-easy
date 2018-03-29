@@ -10,6 +10,7 @@ import 'rxjs/add/operator/switchMap';
 import { IAppState } from '../../store/model';
 import { BakeryAPIService } from './service';
 import { BakeryAPIAction, BakeryAPIActions } from './actions';
+import { ACTIONS_TYPE } from '../model';
 
 @Injectable()
 export class BakeryAPIEpics {
@@ -22,14 +23,29 @@ export class BakeryAPIEpics {
     return createEpicMiddleware(this.createLoadBakeryEpic());
   }
 
+  public createEpicSelectedBakeryCakes() {
+    return createEpicMiddleware(this.createLoadSelectedBakeryEpic());
+  }
+
   private createLoadBakeryEpic(): Epic<BakeryAPIAction, IAppState> {
     return (action$, store) => action$
       .ofType(BakeryAPIActions.LOAD_BAKERIES)
       .switchMap(() => this.service.getBakeries()
-        .map(data => this.actions.loadSucceeded(data))
+        .map(data => this.actions.loadSucceeded(data, ACTIONS_TYPE.BAKERIES))
+        .catch(response => of(this.actions.loadFailed({
+          status: '' + response.status, 
+        }, ACTIONS_TYPE.BAKERIES)))
+        .startWith(this.actions.loadStarted(ACTIONS_TYPE.BAKERIES)))
+  }
+
+  private createLoadSelectedBakeryEpic(): Epic<BakeryAPIAction, IAppState> {
+    return (action$, store) => action$
+      .ofType(BakeryAPIActions.SELECT_BAKERY)
+      .switchMap((action) => this.service.getCakes(action.payload)
+        .map(data => this.actions.loadSucceeded(data, ACTIONS_TYPE.CAKES))
         .catch(response => of(this.actions.loadFailed({
           status: '' + response.status,
-        })))
-        .startWith(this.actions.loadStarted()))
+        }, ACTIONS_TYPE.CAKES)))
+        .startWith(this.actions.loadStarted(ACTIONS_TYPE.CAKES)))
   }
 }

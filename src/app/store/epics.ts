@@ -9,6 +9,7 @@ export class RootEpics {
   public createEpics() {
     return [
       this.bakeryEpics.createEpicBakeries(),
+      this.bakeryEpics.createEpicSelectedBakeryCakes(),
     ];
   }
 }

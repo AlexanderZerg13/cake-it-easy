@@ -1,3 +1,6 @@
+export enum ACTIONS_TYPE {
+  BAKERIES, CAKES
+}
 
 export interface IDataList {
   items: {};

@@ -27,7 +27,8 @@ export class CakesOverviewComponent implements OnInit {
   @select(['selectedBakery'])
   readonly selectedBakery$: Observable<Bakery>;
 
-  selectedCakes: Cake[];
+  @select(['selectedBakeryCakes', 'items'])
+  readonly selectedBakeryCakes$: Observable<Cake>;
 
   constructor(private actions: BakeryAPIActions) {}
 
@@ -37,9 +38,5 @@ export class CakesOverviewComponent implements OnInit {
 
   itemClick(bakery: Bakery): void {
     this.actions.selectBakery(bakery);
-  }
-
-  getKey(_, bakery: Bakery) {
-    return bakery.id;
   }
 }
