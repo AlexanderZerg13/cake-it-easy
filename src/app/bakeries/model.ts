@@ -24,5 +24,32 @@ export interface Bakery {
 export interface Cake {
   name: String;
   pictureUrl: String;
-  imageUrl: String;
+  description: String;
+  cakeSizes: Array<CakeSize>;
+  cakeFillings: Array<CakeFilling>;
+  cakePrices: Array<CakePrice>;
+}
+
+export interface CakeSize {
+  description: string;
+  id: number;
+  name: string;
+  shape: number;
+  size: number;
+  sortNo: number;
+}
+
+export interface CakeFilling {
+  description: string;
+  id: number;
+  isDefault: boolean;
+  name: string;
+}
+
+export interface CakePrice {
+  cakeFillingId: number;
+  cakeSizeId: number;
+  isDeliveryOnly: boolean;
+  price: number;
+  productId: number;
 }

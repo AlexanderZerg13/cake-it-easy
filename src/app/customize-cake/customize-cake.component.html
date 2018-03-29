@@ -19,22 +19,33 @@
       </div>
     </div>
     <div class="cake-builder-sections">
-      <section class="cake-sizes build-section">
-        <div class="col-sm5">
+      <section class="row cake-sizes build-section">
+        <div class="col-sm-5">
           <div class="build-section-header">Choose size</div>
         </div>
         <div class="col-sm-7">
           <div class="build-section-content">
-            
+            <div *ngFor="let size of (cake$ | async).cakeSizes" class="cake-sizes-item">
+              <div class="description">{{size.description}}</div>
+              <div class="figure">
+                <div class="name">{{size.name}}</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-      <section class="cake-fillings build-section">
-        <div class="col-sm5">
+      <section class="row cake-fillings build-section">
+        <div class="col-sm-5">
           <div class="build-section-header">Choose flavour / filling</div>
         </div>
         <div class="col-sm-7">
-          
+          <div class="build-section-content">
+            <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="model">
+              <label *ngFor="let fill of (cake$ | async).cakeFillings" ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" [value]="1">{{fill.name}}
+              </label>
+            </div>
+          </div>
         </div>
       </section>
     </div>
