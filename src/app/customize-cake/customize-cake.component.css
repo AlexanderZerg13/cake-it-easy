@@ -39,6 +39,33 @@
   border-bottom: 1px solid #dedede;
   font-size: 18px;
   padding: 30px 25px;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.build-section-header {
+  padding: 0 10px 0 15px;
+  position: relative;
+  line-height: 38px;
+  left: -15px;
+}
+
+.build-section-header__active {
+    background: #eb7e4a;
+    border-radius: 3px;
+    color: white;
+}
+
+.build-section-header__active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -17px;
+    width: 0;
+    height: 0;
+    border-top: 19px solid transparent;
+    border-bottom: 19px solid transparent;
+    border-left: 19px solid #eb7e4a;
 }
 
 .cake-info .cake-details {
@@ -51,10 +78,6 @@
   margin-bottom: 25px;
 }
 
-.cake-sizes {
-  margin-right: 0;
-  margin-left: 0;
-}
 
 .cake-sizes-item {
   cursor: pointer;
@@ -62,6 +85,10 @@
   width: 60px;
   margin-right: 15px;
   margin-bottom: 8px;
+}
+
+.cake-sizes-item__active {
+
 }
 
 .cake-sizes-item .description {
@@ -84,5 +111,33 @@
 .cake-sizes-item .figure {
   height: 60px;
   width: 60px;
-  background: #aaaaaa;
+}
+
+.cake-filling-item {
+  display: inline-block;
+  margin-bottom: 3px;
+  padding: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+  float: left;
+  clear: both;
+}
+
+.cake-filling-item .name {
+  color: white;
+}
+
+.result-content {
+  margin-left: 15px;
+}
+
+.total_price {
+  margin-bottom: 10px;
+}
+
+.btn-add {
+  border: 0;
+  background: #eb7e4a;
+  font-size: 18px;
+  box-shadow: 0 0 0;
 }

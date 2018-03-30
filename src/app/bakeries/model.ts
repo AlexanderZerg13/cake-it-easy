@@ -16,6 +16,10 @@ export interface IData {
   error: any;
 }
 
+export interface IBasket {
+  items: Array<any>;
+}
+
 export interface Bakery {
   id: number;
   name: string;

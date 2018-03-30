@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 
 import { BakeryAPIAction, BakeryAPIActions } from './actions';
-import { IData, IDataList, IDataObject, Bakery, Cake, ACTIONS_TYPE } from '../model';
+import { IData, IDataList, IDataObject, IBasket, Bakery, Cake, ACTIONS_TYPE } from '../model';
 
 const STATUS_STATE = {
   loading: false,
@@ -16,6 +16,10 @@ const INITIAL_STATE_LIST: IDataList = {
 const INITIAL_STATE_OBJECT: IData = {
   items: null,
   ...STATUS_STATE,
+}
+
+const INITIAL_STATE_BASKET: IBasket = {
+  items: [],
 }
 
 function APIReducer(state: IData, initialState: IData, action: BakeryAPIAction) {
@@ -91,6 +95,38 @@ export function createSelectedCakeAPIReducer() {
 
     if (action.meta === ACTIONS_TYPE.CAKE) {
       return APIReducer(state, INITIAL_STATE_OBJECT, action);
+    }
+
+    return state;
+  }
+}
+
+export function createBacketReducer() {
+  function getInitialState(): IBasket {
+    let items = localStorage.getItem('basket');
+    if (items) {
+      return {items: JSON.parse(items)};
+    }
+    return INITIAL_STATE_BASKET;
+  }
+
+  return function backetReducer(state: IBasket = getInitialState(), a: Action): IBasket {
+    const action = a as BakeryAPIAction;
+
+    if (action.type === BakeryAPIActions.ADD_CAKE_TO_BASKET) {
+      let items = [...state.items, action.payload];
+      localStorage.setItem('basket', JSON.stringify(items));
+      return {
+        ...state,
+        items: items,
+      }
+    } else if (action.type === BakeryAPIActions.REMOVE_CAKE_FROM_BASKET) {
+      let items = [...state.items.filter((item, i) => i !== state.items.indexOf(action.payload), 1)]
+      localStorage.setItem('basket', JSON.stringify(items));
+      return {
+        ...state,
+        items: items,
+      }
     }
 
     return state;

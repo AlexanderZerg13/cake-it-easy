@@ -1,3 +1,35 @@
-<p>
-  cart works!
-</p>
+<div class="basket">
+      <div class="cake-item" *ngFor="let cakePair of cakePairs$ | async">
+        <div class="image-conteiner">
+          <img
+            class="img-responsive cake-img"
+            src="{{cakePair.cake.imageUrl}}"
+          />
+        </div>
+        
+        <div class="cake-info">
+          <div
+            class="cake-name">
+            {{cakePair.cake.name}}
+          </div>
+          <div
+            class="cake-data">
+            Filling: {{getFilling(cakePair).name}}
+          </div>
+          <div
+            class="cake-data">
+            Size: {{getSize(cakePair).name}}
+          </div>
+          <div
+            class="cake-price">
+            Price: {{cakePair.cakePrice.price}} kr
+          </div>
+          <div class="btn btn-primary btn-remove" (click)="removeItem(cakePair)">
+            remove
+          </div>
+        </div>
+      </div>
+    <div class="row total_price">
+      <h4>Total: {{this.sum}} {{this.sum? 'kr': ''}}</h4>
+    </div>
+</div>

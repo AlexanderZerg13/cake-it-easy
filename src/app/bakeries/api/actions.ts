@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { dispatch } from '@angular-redux/store';
 import { FluxStandardAction } from 'flux-standard-action';
 
-import { Bakery, ACTIONS_TYPE } from '../model';
+import { Bakery, Cake, CakePrice, ACTIONS_TYPE } from '../model';
 
 export type BakeryAPIAction = FluxStandardAction<any, ACTIONS_TYPE>;
 
@@ -15,6 +15,8 @@ export class BakeryAPIActions {
   static readonly LOAD_CAKE = 'LOAD_CAKE';
 
   static readonly SELECT_BAKERY = 'SELECT_BAKERY';
+  static readonly ADD_CAKE_TO_BASKET = 'ADD_CAKE_TO_BASKET';
+  static readonly REMOVE_CAKE_FROM_BASKET = 'REMOVE_CAKE_FROM_BASKET';
 
   static readonly LOAD_STARTED = 'LOAD_STARTED';
   static readonly LOAD_SUCCEEDED = 'LOAD_SUCCEEDED';
@@ -49,6 +51,19 @@ export class BakeryAPIActions {
     payload,
   });
 
+  @dispatch()
+  addCakeToBasket = (cake: Cake, cakePrice: CakePrice): BakeryAPIAction => ({
+    type: BakeryAPIActions.ADD_CAKE_TO_BASKET,
+    meta: null,
+    payload: { cake, cakePrice },
+  })
+
+  @dispatch()
+  removeFromBacket = (cakePair): BakeryAPIAction => ({
+    type: BakeryAPIActions.REMOVE_CAKE_FROM_BASKET,
+    meta: null,
+    payload: cakePair,
+  })
 
   loadStarted = (meta: ACTIONS_TYPE): BakeryAPIAction => ({
     type: BakeryAPIActions.LOAD_STARTED,

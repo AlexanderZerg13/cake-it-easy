@@ -4,7 +4,8 @@ import { routerReducer } from '@angular-redux/router';
 import { createBakeriesAPIReducer,
   createSelectedBakeryReducer,
   createSelectedBakeryCakesAPIReducer,
-  createSelectedCakeAPIReducer} from '../bakeries/api/reducer';
+  createSelectedCakeAPIReducer,
+  createBacketReducer } from '../bakeries/api/reducer';
 
 export const rootReducer = combineReducers({
   router: routerReducer,
@@ -12,4 +13,5 @@ export const rootReducer = combineReducers({
   selectedBakery: createSelectedBakeryReducer(),
   selectedBakeryCakes: createSelectedBakeryCakesAPIReducer(),
   selectedCake: createSelectedCakeAPIReducer(),
+  basket: createBacketReducer(),
 });

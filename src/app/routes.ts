@@ -6,5 +6,5 @@ export const appRoutes = [
   { path: '', redirectTo: '/overview', pathMatch: 'full' },
   { path: 'overview', component: CakesOverviewComponent },
   { path: 'customize-cake/:id', component: CustomizeCakeComponent },
-  { path: 'cart', component: CartComponent },
+  { path: 'basket', component: CartComponent },
 ];

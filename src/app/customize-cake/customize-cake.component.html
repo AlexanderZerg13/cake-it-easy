@@ -12,7 +12,7 @@
             <div class="cake-details">
               <h2 class="cake-name">{{(cake$ | async)?.name}}</h2>
               <h4 class="vendor-name"><a class="btn btn-link" >{{(cake$ | async)?.bakery.name}}</a></h4>
-              <div class="description">{{(cake$ | async).description}}</div>
+              <div class="description">{{(cake$ | async)?.description}}</div>
             </div>
           </div>
         </div>
@@ -21,13 +21,20 @@
     <div class="cake-builder-sections">
       <section class="row cake-sizes build-section">
         <div class="col-sm-5">
-          <div class="build-section-header">Choose size</div>
+          <div 
+              class="build-section-header"
+              [ngClass]="{'build-section-header__active': !selectedSize}"
+              >Choose size</div>
         </div>
         <div class="col-sm-7">
           <div class="build-section-content">
-            <div *ngFor="let size of (cake$ | async).cakeSizes" class="cake-sizes-item">
+            <div *ngFor="let size of (cake$ | async).cakeSizes" 
+              class="cake-sizes-item"
+              (click)="selectSize(size)">
               <div class="description">{{size.description}}</div>
-              <div class="figure">
+              <div
+                [@cakeSize]="selectedSize === size ? 'active': 'inactive'"
+                class="figure">
                 <div class="name">{{size.name}}</div>
               </div>
             </div>
@@ -36,16 +43,31 @@
       </section>
       <section class="row cake-fillings build-section">
         <div class="col-sm-5">
-          <div class="build-section-header">Choose flavour / filling</div>
+          <div 
+            class="build-section-header"
+            [ngClass]="{'build-section-header__active': !selectedFilling}"
+            >Choose flavour / filling</div>
         </div>
         <div class="col-sm-7">
           <div class="build-section-content">
-            <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="model">
-              <label *ngFor="let fill of (cake$ | async).cakeFillings" ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" [value]="1">{{fill.name}}
-              </label>
+            <div *ngFor="let fill of (cake$ | async)?.cakeFillings"
+              class="cake-filling-item"
+              [@cakeSize]="selectedFilling === fill ? 'active': 'inactive'"
+              (click)="selectFilling(fill)">
+              <div class="name">{{fill.name}}</div>
             </div>
           </div>
+        </div>
+      </section>
+      <section class="build-section result-content">
+        <div class="row total_price">
+          Total: {{price?.price}} {{price?.price && "kr"}}
+        </div>
+        <div class="row">
+          <button 
+            [ngClass]="{'disabled': (!selectedFilling || !selectedSize)}"
+            (click)="addMore()"
+            class="btn btn-primary btn-add"><i class="fa fa-plus"></i> Add more</button>
         </div>
       </section>
     </div>

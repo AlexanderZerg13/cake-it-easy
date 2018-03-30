@@ -6,4 +6,5 @@ export interface IAppState {
   selectedBakery?: Bakery;
   cakes?: any;
   selectedCake?: any;
+  basket?: any;
 }

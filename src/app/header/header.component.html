@@ -1,13 +1,14 @@
 <header>
-  <div class="header">
-    <div class="container">
-      <div class="header-logo pull-left">
-        <a routerLink="/overview">
-          <img class="img-fluid" src="/assets/logo-black.png"/>
-        </a>
-      </div>
-      <div class="header-bucket pull-right">
-        <a routerLink="/cart">Корзина</a>
+  <div class="header container">
+    <div class="header-logo">
+      <a routerLink="/overview">
+        <img class="img-fluid" src="/assets/logo-black.png"/>
+      </a>
+    </div>
+    <div class="header-bucket">
+      <div class="bucket" routerLink="/basket">
+        Basket {{(cakes$ | async).length ? ("(" + (cakes$ | async).length + ")") : ""}}
+        <i class="fa fa-chevron-right"></i>
       </div>
     </div>
   </div>
